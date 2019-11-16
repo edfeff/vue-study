@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{dogs}}</p>
+    <button @click="change0">chang0</button>
+    <button @click="change1">chang1</button>
+    <button @click="change2">change2</button>
+  </div>
+  <script src="./vue.min.js"></script>
+  <script>
+    var hour = new Date().getHours()
+    new Vue({
+      el: "#app",
+      data: {
+        dogs: ["a", "c", "b"]
+      }, methods: {
+        change0() {
+          //直接使用索引修改无效
+          // this.dogs[1]="X";
+          //ok
+          this.dogs.splice(0, 1, "X")
+          console.log(this.dogs)
+        },
+        change1() {
+          this.$set(this.dogs, 1, "XX")
+        },
+        change2() {
+          Vue.set(this.dogs,2,"XXxX")
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

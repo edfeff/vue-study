@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p v-if="isAM">上午好</p>
+    <p v-if="isPM">中午好</p>
+    <p v-if="isEven">晚上好</p>
+  </div>
+  <script src="./vue.min.js"></script>
+  <script>
+    var hour = new Date().getHours()
+    new Vue({
+      el: "#app",
+      data: {
+        isAM: hour < 12,
+        isPM: hour >= 12 && hour < 18,
+        isEven: hour >= 18
+      }
+    })
+  </script>
+</body>
+
+</html>

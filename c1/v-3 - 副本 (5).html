@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ol>
+      <li v-for="d in dogs" :key="d.id">
+        {{ d }}
+      </li>
+    </ol>
+    <ul>
+      <li v-for="(item,i) in dogs" :key="i">
+        第 {{i+1}}个 ：{{ item }}
+      </li>
+    </ul>
+  </div>
+  <script src="./vue.min.js"></script>
+  <script>
+    var hour = new Date().getHours()
+    new Vue({
+      el: "#app",
+      data: {
+        dogs: ["A dog", "B dog", "C dog"]
+      }
+    })
+  </script>
+</body>
+
+</html>

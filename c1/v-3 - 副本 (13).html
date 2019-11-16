@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{formData.username}}</p>
+    <p>{{formData.name1}}</p>
+    <p>{{formData.name2}}</p>
+    <p>{{formData.name3}}</p>
+  </div>
+  <script src="./vue.min.js"></script>
+  <script>
+    var hour = new Date().getHours()
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        formData: {
+          username: 'username'
+        }
+      }
+    });
+    //此属性不是响应式的，设置成为响应式的方式
+    vm.formData.name1 = "name1"
+    // 1
+    vm.formData = Object.assign({}, vm.formData, {
+      name2: "name2"
+    })
+    //2 
+    Vue.set(vm.formData, "name3", "name3")
+    //3.
+    // $set("name4", "name4")
+
+  </script>
+</body>
+
+</html>

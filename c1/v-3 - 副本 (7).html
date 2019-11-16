@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1 v-if="state === 'loading'">loading</h1>
+    <h1 v-else-if="state === error">error</h1>
+    <h1 v-else>加载成功</h1>
+  </div>
+  <script src="./vue.min.js"></script>
+  <script>
+    var hour = new Date().getHours()
+    new Vue({
+      el: "#app",
+      data: {
+        state: "loading"
+      }
+    })
+  </script>
+</body>
+
+</html>

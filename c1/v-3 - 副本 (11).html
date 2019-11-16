@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>过去了{{seconds}}秒</p>
+    <button :disabled="buttonDisabled">被时间控制的按钮</button>
+  </div>
+  <script src="./vue.min.js"></script>
+  <script>
+    var hour = new Date().getHours()
+    new Vue({
+      el: "#app",
+      data: {
+        seconds: 0,
+        buttonDisabled: true
+      },
+      created() {
+        let time = sessionStorage.getItem("all_time_in_seconds")
+        if (time) {
+          this.seconds = time;
+        } else {
+          this.seconds = 0;
+        }
+        setInterval(() => {
+          this.seconds++;
+          this.buttonDisabled = !this.buttonDisabled
+          sessionStorage.setItem("all_time_in_seconds", this.seconds);
+          // document.write("<div>"+this.seconds+"</div>")
+        }, 1000)
+      },
+    })
+  </script>
+</body>
+
+</html>
