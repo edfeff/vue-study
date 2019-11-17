@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 // 导入样式
 import "./assets/css/global.css"
 import 'element-ui/lib/theme-chalk/index.css'
-import axios from 'axios'
+import http from './util/http'
 
 Vue.config.productionTip = false
 
@@ -15,9 +15,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$message = ElementUI.Message
 
-//axios 配置
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1'
-Vue.prototype.$http = axios
+Vue.prototype.$http = http
 
 
 new Vue({

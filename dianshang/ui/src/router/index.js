@@ -2,13 +2,25 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from "@/components/Login"
 import Home from "@/components/Home"
+import http from '@/util/http'
+import Welcome from '@/components/Welcome'
+import Users from '@/components/user/Users'
+
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     { path: "/login", component: Login },
-    { path: "/home", component: Home },
     { path: "/", redirect: "/login" },
+    {
+      path: "/home",
+      component: Home,
+      redirect: '/welcome',
+      children: [
+        { path: '/welcome', component: Welcome },
+        { path: '/users', component: Users },
+      ]
+    },
   ]
 })
 
@@ -24,8 +36,8 @@ router.beforeEach((to, from, next) => {
     } else {
       //服务器校验 token 有效性
       (async () => {
-        let { data: result } = await Vue.prototype.$http.post(
-          "/checkToken?token=" + token
+        let { data: result } = await http.post(
+          "/checkToken"
         );
         if (result.meta.status !== 200) {
           return next('/login')
