@@ -52,7 +52,7 @@ export default {
         ]
       }
     }
-    console.log(result)
+    // console.log(result)
   },
   methods: {
     login() {
