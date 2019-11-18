@@ -48,7 +48,12 @@
               size="mini"
               @click="updateUserDialog(scope.row)"
             ></el-button>
-            <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="deleteUser(scope.row)"
+            ></el-button>
             <el-tooltip content="配置角色" placement="top" :enterable="false">
               <el-button type="warning" icon="el-icon-setting" size="mini"></el-button>
             </el-tooltip>
@@ -270,6 +275,24 @@ export default {
           }
         }
       })
+    },
+    async deleteUser(row) {
+      if (row && row.id) {
+        console.log(row)
+        try {
+          let { data: res } = await this.$http.delete('/deleteUser/' + row.id)
+          if (!res) {
+            this.$message.error('网络出现问题，请稍后重试')
+          } else if (res.meta.status !== 200) {
+            this.$message.error('删除用户失败')
+          } else {
+            this.$message.success('删除用户成功')
+            this.getUserList()
+          }
+        } catch (err) {
+          this.$message.error('网络出现问题，请稍后重试：' + err)
+        }
+      }
     }
   }
 }
