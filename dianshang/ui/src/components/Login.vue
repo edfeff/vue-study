@@ -58,17 +58,23 @@ export default {
     login() {
       //async 和 await 结合使用
       this.$refs.loginFormRef.validate(async valid => {
-        if (!valid) return
-        // es6 参数解构
-        let { data: result } = await this.$http.post('login', this.loginForm)
-        if (result.meta.status !== 200) {
-          this.$message.error('登陆失败')
-        } else {
-          this.$message.success('登陆成功')
-          //1, 保存token 到sessionStorage
-          window.sessionStorage.setItem('token', result.data.token)
-          //2 主页跳转 /home
-          this.$router.push('/home')
+        if (!valid) {
+          return this.$message.error('请输入正确的用户名和密码')
+        }
+        try {
+          // es6 参数解构
+          let { data: result } = await this.$http.post('login', this.loginForm)
+          if (result.meta.status !== 200) {
+            this.$message.error('登陆失败')
+          } else {
+            this.$message.success('登陆成功')
+            //1, 保存token 到sessionStorage
+            window.sessionStorage.setItem('token', result.data.token)
+            //2 主页跳转 /home
+            this.$router.push('/home')
+          }
+        } catch (err) {
+          return this.$message.error('网络错误，请稍后重试')
         }
       })
     },
