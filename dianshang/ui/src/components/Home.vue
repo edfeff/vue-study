@@ -28,7 +28,7 @@
           :default-active="activePath"
         >
           <!-- 一级菜单 -->
-          <el-submenu :index="menu.id+ ''" v-for="menu in menulist" :key="menu.id">
+          <el-submenu :index="menu.id+ ''" v-for="(menu,idx) in menulist" :key="idx">
             <!-- 一级菜单  模板-->
             <template slot="title">
               <!-- 一级菜单  图标-->
@@ -40,8 +40,8 @@
             <!-- 二级菜单 -->
             <el-menu-item
               :index="'/'+subMenu.path"
-              v-for="subMenu in menu.children"
-              :key="subMenu.id"
+              v-for="(subMenu,subIdx) in menu.children"
+              :key="subIdx"
               @click="saveNavState('/'+subMenu.path)"
             >
               <template slot="title">
